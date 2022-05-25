@@ -6,9 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
-github_reference/
-reference/
+github_references/
+references/
 logs/
+my_idea.md
+*.xml
+*.xlsx
 
 # Distribution / packaging
 .Python
