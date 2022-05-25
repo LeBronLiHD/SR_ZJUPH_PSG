@@ -12,6 +12,7 @@ logs/
 my_idea.md
 *.xml
 *.xlsx
+test.py
 
 # Distribution / packaging
 .Python
