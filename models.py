@@ -10,11 +10,11 @@ from tensorflow.keras.applications import ResNet152V2, ResNet101V2, EfficientNet
 
 
 def vgg_19():
-    base_model = VGG19(weights='imagenet', include_top=False, pooling=None,
-                                input_shape=params.INPUT_SHAPE)
+    base_model = VGG19(weights=None, include_top=False, pooling=None,
+                                input_shape=params.INPUT_SHAPE_3)
 
     # freeze extraction layers
-    base_model.trainable = False
+    base_model.trainable = True
 
     # add custom top layers
     x = base_model.output
@@ -38,8 +38,8 @@ def vgg_19():
     return model
 
 def efficient_net_v2l():
-    base_model = EfficientNetV2L(weights='imagenet', include_top=False, pooling='max',
-                             input_shape=params.INPUT_SHAPE) 
+    base_model = EfficientNetV2L(weights=None, include_top=False, pooling='max',
+                             input_shape=params.INPUT_SHAPE_3) 
 
     # freeze extraction layers
     base_model.trainable = True
@@ -80,11 +80,11 @@ def efficient_net_v2l():
     return model
 
 def resnet_101v2():
-    base_model = ResNet101V2(weights='imagenet', include_top=False,
-                         input_shape=params.INPUT_SHAPE)
+    base_model = ResNet101V2(weights=None, include_top=False,
+                         input_shape=params.INPUT_SHAPE_3)
 
     # freeze extraction layers
-    base_model.trainable = False
+    base_model.trainable = True
 
     # add custom top layers
     x = base_model.output
