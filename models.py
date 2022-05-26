@@ -176,8 +176,8 @@ def cnn_2():
 
     seq_input = Input(shape=params.INPUT_SHAPE_2)
     base_model = cnn_base()
-    # for layer in base_model.layers:
-    #     layer.trainable = False
+    for layer in base_model.layers:
+        layer.trainable = True
     encoded_sequence = TimeDistributed(base_model)(seq_input)
     encoded_sequence = SpatialDropout1D(rate=0.01)(Convolution1D(128,
                                                                kernel_size=3,
@@ -204,8 +204,8 @@ def cnn_lstm():
 
     seq_input = Input(shape=params.INPUT_SHAPE_2)
     base_model = cnn_base()
-    # for layer in base_model.layers:
-    #     layer.trainable = False
+    for layer in base_model.layers:
+        layer.trainable = True
     encoded_sequence = TimeDistributed(base_model)(seq_input)
     encoded_sequence = Bidirectional(LSTM(100, return_sequences=True))(encoded_sequence)
     encoded_sequence = Dropout(rate=0.5)(encoded_sequence)
@@ -226,8 +226,8 @@ def cnn_crf():
 
     seq_input = Input(shape=params.INPUT_SHAPE_2)
     base_model = cnn_base()
-    # for layer in base_model.layers:
-    #     layer.trainable = False
+    for layer in base_model.layers:
+        layer.trainable = True
     encoded_sequence = TimeDistributed(base_model)(seq_input)
     encoded_sequence = SpatialDropout1D(rate=0.01)(Convolution1D(128,
                                                     kernel_size=3,

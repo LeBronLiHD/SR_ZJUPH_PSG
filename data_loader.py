@@ -30,6 +30,7 @@ def _get_normal_edf(edf_data):
     for j in range(params.DIMENSION):
         print("Normalizing ... Current Dimension ->", j)
         new_data.append(utils._normalization(edf_data[j][params.VALUE_IDX][0]))
+        # new_data.append(edf_data[j][params.VALUE_IDX][0])
     print("Normalization Done!")
     return np.array(new_data)
 
@@ -41,8 +42,8 @@ def _generate_train_test(edf_data, txt_data):
         ori_y.append(params.LABEL_DICT[txt_data[i]])
         ori_x_unit = []
         for j in range(params.DIMENSION):
-            ori_x_unit.append(np.array(edf_data[j][round(params.UNIT_LENGTH_F * j):round(params.UNIT_LENGTH_F * j) + params.UNIT_LENGTH]))
-        ori_x.append(ori_x_unit)
+            ori_x_unit.append(np.array(edf_data[j][round(params.UNIT_LENGTH_F * j):round(params.UNIT_LENGTH_F * j) + params.UNIT_LENGTH]).T)
+        ori_x.append(np.array(ori_x_unit).T)
     return np.array(ori_x), np.array(ori_y)
 
 # @static
@@ -65,9 +66,9 @@ def get_train_test():
     x_train, y_train, x_test, y_test = [], [], [], []
     for patient in params.PATIENTS:
         cur_x_train, cur_x_test, cur_y_train, cur_y_test = _get_train_test(patient=patient)
-        x_train.extend(np.array(cur_x_train).T)
+        x_train.extend(cur_x_train)
         y_train.extend(cur_y_train)
-        x_test.extend(np.array(cur_x_test).T)
+        x_test.extend(cur_x_test)
         y_test.extend(cur_y_test)
     x_train, y_train, x_test, y_test = np.array(x_train), np.array(y_train), np.array(x_test), np.array(y_test)
     show_shape(x_train, y_train, x_test, y_test)
