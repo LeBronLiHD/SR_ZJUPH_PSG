@@ -11,3 +11,14 @@
   - `resnet_101v2`
   - `efficient_net_v2l`
   - `vgg19`
+- `train_model_attsleep`:
+
+![AttnSleep](https://github.com/LeBronLiHD/SR_ZJUPH_PSG/blob/main/images/AttnSleep.png)
+
+- `train_model_tinysleep`:
+
+![tinysleepnet](https://github.com/LeBronLiHD/SR_ZJUPH_PSG/blob/main/images/tinysleepnet.png)
+
+- `train_model_deepsleep`:
+
+![deepsleepnet](https://github.com/LeBronLiHD/SR_ZJUPH_PSG/blob/main/images/deepsleepnet.png)
