@@ -13,6 +13,8 @@ my_idea.md
 *.xml
 *.xlsx
 test.py
+test.ipynb
+data_temp/
 *.rar
 PSGData3_Hang7/
 PSGData4_Hang7/
