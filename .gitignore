@@ -13,6 +13,9 @@ my_idea.md
 *.xml
 *.xlsx
 test.py
+*.rar
+PSGData3_Hang7/
+PSGData4_Hang7/
 
 # Distribution / packaging
 .Python

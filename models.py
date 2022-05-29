@@ -184,9 +184,9 @@ def cnn_2():
                                                                activation="relu",
                                                                padding="same")(encoded_sequence))
     encoded_sequence = Dropout(rate=0.05)(Convolution1D(128,
-                                                               kernel_size=3,
-                                                               activation="relu",
-                                                               padding="same")(encoded_sequence))
+                                                        kernel_size=3,
+                                                        activation="relu",
+                                                        padding="same")(encoded_sequence))
 
     out = Convolution1D(nclass, kernel_size=3, activation="softmax", padding="same")(encoded_sequence)
 

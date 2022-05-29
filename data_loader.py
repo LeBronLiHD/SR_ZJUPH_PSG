@@ -62,6 +62,14 @@ def show_shape(x_train, y_train, x_test, y_test):
     print("x_test  ->", x_test.shape, x_test[0].shape)
     print("y_test  ->", y_test.shape)
 
+# @static
+def _small_sample(data):
+    index = np.arange(len(data))
+    np.random.shuffle(index)
+    index = index[0:round(len(index) * params.SAMPLE_RATE)]
+    print("small-sample process done!")
+    return data[index]
+
 def get_train_test():
     x_train, y_train, x_test, y_test = [], [], [], []
     for patient in params.PATIENTS:
@@ -72,4 +80,7 @@ def get_train_test():
         y_test.extend(cur_y_test)
     x_train, y_train, x_test, y_test = np.array(x_train), np.array(y_train), np.array(x_test), np.array(y_test)
     show_shape(x_train, y_train, x_test, y_test)
+    if params.SMALL_SAMPLE:
+        x_train, y_train, x_test, y_test = _small_sample(x_train), _small_sample(y_train), _small_sample(x_test), _small_sample(y_test)
+        show_shape(x_train, y_train, x_test, y_test)
     return x_train, y_train, x_test, y_test
