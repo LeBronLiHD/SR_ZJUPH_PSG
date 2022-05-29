@@ -84,3 +84,14 @@ def get_train_test():
         x_train, y_train, x_test, y_test = _small_sample(x_train), _small_sample(y_train), _small_sample(x_test), _small_sample(y_test)
         show_shape(x_train, y_train, x_test, y_test)
     return x_train, y_train, x_test, y_test
+
+# @static
+def _generate_sequence(data):
+    seq = params.SEQUENCE
+    ret = []
+    for i in range(len(data) - seq):
+        ret.append(data[i:i+seq])
+    return np.array(ret)
+
+def generate_sequence(x_train, y_train, x_test, y_test):
+    return _generate_sequence(x_train), _generate_sequence(y_train), _generate_sequence(x_test), _generate_sequence(y_test)
