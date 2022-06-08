@@ -15,6 +15,7 @@ my_idea.md
 test.py
 test.ipynb
 data_temp/
+*.npz
 *.rar
 PSGData3_Hang7/
 PSGData4_Hang7/
