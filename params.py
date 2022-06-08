@@ -4,6 +4,7 @@ import os
 
 
 DATA_PATH = ".\\data"
+NPZ_DATA = "data_sleep.npz"
 
 def get_patients(path=DATA_PATH):
     patients = os.listdir(path)
