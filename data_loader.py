@@ -70,6 +70,16 @@ def _small_sample(data):
     print("small-sample process done!")
     return data[index]
 
+def get_train_test_v2():
+    data = np.load(os.path.join(params.DATA_PATH, params.NPZ_DATA))
+    X, y = data['x'], data['y']
+    x_train, y_train, x_test, y_test = _split_train_test(X, y)
+    show_shape(x_train, y_train, x_test, y_test)
+    if params.SMALL_SAMPLE:
+        x_train, y_train, x_test, y_test = _small_sample(x_train), _small_sample(y_train), _small_sample(x_test), _small_sample(y_test)
+        show_shape(x_train, y_train, x_test, y_test)
+    return x_train, y_train, x_test, y_test
+
 def get_train_test():
     x_train, y_train, x_test, y_test = [], [], [], []
     for patient in params.PATIENTS:
