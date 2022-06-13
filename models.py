@@ -2,7 +2,7 @@ from tkinter.messagebox import NO
 from tensorflow.keras import optimizers, losses, activations, models
 from tensorflow.keras.layers import Dense, Input, Dropout, Convolution1D, MaxPool1D, GlobalMaxPool1D, GlobalAveragePooling1D, \
     concatenate, SpatialDropout1D, TimeDistributed, Bidirectional, LSTM, GlobalAveragePooling2D, BatchNormalization, Conv1D, \
-    ReLU, Flatten, MaxPool2D, RNN, StackedRNNCells, RNN, LSTMCell
+    ReLU, Flatten, MaxPool2D, RNN, StackedRNNCells, RNN, LSTMCell, Convolution2D
 import tensorflow_addons as tfa
 # from tensorflow_addons.layers import CRF
 from keras_contrib.layers import CRF
@@ -189,6 +189,37 @@ def resnet_101v2():
         if layer.trainable==True:
             print(layer)
     model.summary()
+    return model
+
+def cnn_0():
+    nclass = params.NUM_CLASS
+    inp = Input(shape=params.INPUT_SHAPE)
+    img_1 = Convolution1D(16, kernel_size=5, activation=activations.relu, padding="valid")(inp)
+    img_1 = Convolution1D(16, kernel_size=5, activation=activations.relu, padding="valid")(img_1)
+    img_1 = MaxPool1D(pool_size=8)(img_1)
+    img_1 = Dropout(rate=0.01)(img_1)
+    img_1 = Convolution1D(32, kernel_size=7, activation=activations.relu, padding="valid")(img_1)
+    img_1 = Convolution1D(32, kernel_size=7, activation=activations.relu, padding="valid")(img_1)
+    img_1 = MaxPool1D(pool_size=8)(img_1)
+    img_1 = Dropout(rate=0.01)(img_1)
+    img_1 = Convolution1D(64, kernel_size=7, activation=activations.relu, padding="valid")(img_1)
+    img_1 = Convolution1D(64, kernel_size=7, activation=activations.relu, padding="valid")(img_1)
+    img_1 = MaxPool1D(pool_size=4)(img_1)
+    img_1 = Dropout(rate=0.01)(img_1)
+    dense_1 = Dropout(rate=0.01)(Dense(64, activation=activations.relu, name="dense_1")(img_1))
+    dense_1 = Dropout(rate=0.05)(Dense(16, activation=activations.relu, name="dense_2")(dense_1))
+    flat = Flatten()(dense_1)
+    dense_1 = Dropout(rate=0.01)(Dense(64, activation=activations.relu, name="dense_1")(img_1))
+    dense_1 = Dense(nclass, activation=activations.softmax, name="dense_3")(flat)
+
+    model = models.Model(inputs=inp, outputs=dense_1)
+    # opt = optimizers.Adam(0.001)
+
+    # model.compile(optimizer=opt, loss=losses.sparse_categorical_crossentropy, metrics=['acc'])
+    model.summary()
+    for layer in model.layers:
+        if layer.trainable==True:
+            print(layer)
     return model
 
 def cnn_1():
